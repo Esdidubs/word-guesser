@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Password Generator</title>
+</head>
+<body>
+    <main>
+
+        <!--Passphrase Generator-->
+        <form id="passphrase">
+            <div class="numberBox">
+                <label for="guess">Guess the word</label>
+                <input type='text' id='guess' name='guess' value="" >
+            </div>
+            <div class="subBtn">
+                <button id="phraseBtn" onclick="phraseSub()">Guess</button>
+            </div>   
+        </form>
+
+        <!--The password section-->       
+        <div id="answerBox"></div>
+    </main>
+    <script
+        src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous">
+    </script>
+    <script src="elements.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
