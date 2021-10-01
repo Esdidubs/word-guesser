@@ -5,6 +5,7 @@ function phraseSub(){
     event.preventDefault();
     let answerText = ``;
     let guess = $("#guess").val();
+    guess = guess.toLowerCase();
     let lengthCheck = 'incorrect';
 
     if(guess.length == randomWord.length){
