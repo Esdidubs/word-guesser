@@ -53,8 +53,11 @@ div {
     height: 3rem;
     padding: 1rem;
     resize: none;
-    text-align: center;
-    width: 30rem;
+    width: 40rem;
+}
+
+#answerBox p {
+    margin: 2px;
 }
 
 /*=====================================

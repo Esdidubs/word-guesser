@@ -21,13 +21,17 @@ function phraseSub(){
     if(guess == randomWord){
         $("#guess").prop('disabled', true);
         answerText = `That is correct!`
+        $('.subBtn').html(`
+            <button id="phraseBtn" onclick="tryAgain()">Play Again</button>
+        `);
+
     } else {
         $('#guess').val('');
-        answerText += `<p>Your guess was '${guess}'.</p>`;
-        answerText += `<p>That is incorrect.</p>`;
-        answerText += `<p>You word is the ${lengthCheck} length.</p>`;
-        answerText += `<p>You have ${letterCheck} correct letters.</p>`;
-        answerText += `<p>You have ${locationCheck} letters in the correct spot.</p>`;
+        answerText += `<p>- Your guess was '${guess}'.</p>`;
+        answerText += `<p>- That is incorrect.</p>`;
+        answerText += `<p>- Your word is the ${lengthCheck} length.</p>`;
+        answerText += `<p>- You have ${letterCheck} correct letters.</p>`;
+        answerText += `<p>- You have ${locationCheck} letters in the correct spot.</p>`;
     }
 
     $('#answerBox').html(`
@@ -96,4 +100,15 @@ function locationCheckFunc(guess){
         }
     }
     return correctLetters;
+}
+
+function tryAgain(){
+    event.preventDefault();
+    randomWord = passphrases[Math.floor(Math.random() * passphrases.length)];
+    $("#guess").prop('disabled', false);
+    $('#guess').val('');
+    $('.subBtn').html(`
+        <button id="phraseBtn" onclick="phraseSub()">Guess</button>
+    `);
+    $('#answerBox').html(``);
 }
