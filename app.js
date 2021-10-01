@@ -1,24 +1,22 @@
 let randomWord = passphrases[Math.floor(Math.random() * passphrases.length)];
 let numberOfGuesses = 0;
 
-// makes a password using the passphrases array
+var sec = 0;
+function pad ( val ) { return val > 9 ? val : "0" + val; }
+var timer = setInterval( function(){
+    $("#seconds").html(pad(++sec%60));
+    $("#minutes").html(pad(parseInt(sec/60,10)));
+}, 1000);
+
+
 function phraseSub(){
     event.preventDefault();
     let answerText = ``;
-    let lengthCheck = '';
     let guess = $("#guess").val();
     guess = guess.toLowerCase();
     numberOfGuesses++;
     
-
-    if(guess.length == randomWord.length){
-        lengthCheck = 'the correct length.';
-    } else if(guess.length < randomWord.length) {
-        lengthCheck = 'too short';
-    } else if(guess.length > randomWord.length) {
-        lengthCheck = 'too long';
-    }
-
+    let lengthCheck = lengthCheckFunc(guess);
     let letterCheck = letterCheckFunc(guess);
     let locationCheck = locationCheckFunc(guess);
     
@@ -33,7 +31,7 @@ function phraseSub(){
         $('.subBtn').html(`
             <button id="phraseBtn" onclick="tryAgain()">Play Again</button>
         `);
-
+        clearInterval(timer);
     } else {
         $('#guess').val('');
         answerText += `<p>- Your guess was '${guess}'.</p>`;
@@ -48,6 +46,18 @@ function phraseSub(){
         ${answerText}
     `);
 };
+
+function lengthCheckFunc(guess){
+    let length;
+    if(guess.length == randomWord.length){
+        length = 'the correct length.';
+    } else if(guess.length < randomWord.length) {
+        length = 'too short';
+    } else if(guess.length > randomWord.length) {
+        length = 'too long';
+    }
+    return length;
+}
 
 function letterCheckFunc(guess){
     let guessArr = guess.split('');
@@ -122,4 +132,11 @@ function tryAgain(){
         <button id="phraseBtn" onclick="phraseSub()">Guess</button>
     `);
     $('#answerBox').html(``);
+    $("#seconds").html('00');
+    $("#minutes").html('00');
+    sec = 0;
+    timer = setInterval( function(){
+        $("#seconds").html(pad(++sec%60));
+        $("#minutes").html(pad(parseInt(sec/60,10)));
+    }, 1000);
 }
