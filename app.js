@@ -14,6 +14,7 @@ function phraseSub(){
     }
 
     let letterCheck = letterCheckFunc(guess);
+    let locationCheck = locationCheckFunc(guess);
     
     console.log(randomWord)
 
@@ -26,6 +27,7 @@ function phraseSub(){
         answerText += `<p>That is incorrect.</p>`;
         answerText += `<p>You word is the ${lengthCheck} length.</p>`;
         answerText += `<p>You have ${letterCheck} correct letters.</p>`;
+        answerText += `<p>You have ${locationCheck} letters in the correct spot.</p>`;
     }
 
     $('#answerBox').html(`
@@ -75,3 +77,23 @@ function letterCheckFunc(guess){
     return correctLetters;
 }
 
+function locationCheckFunc(guess){
+    let guessArr = guess.split('');
+    let answerArr = randomWord.split('');
+    let correctLetters = 0;
+
+    if(guessArr.length <= answerArr.length){
+        for(let letter in guessArr){
+            if(guessArr[letter]==answerArr[letter]){
+                correctLetters++;
+            }
+        }
+    } else {
+        for(let letter in answerArr){
+            if(answerArr[letter]==guessArr[letter]){
+                correctLetters++;
+            }
+        }
+    }
+    return correctLetters;
+}
