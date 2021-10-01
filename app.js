@@ -1,17 +1,22 @@
 let randomWord = passphrases[Math.floor(Math.random() * passphrases.length)];
+let numberOfGuesses = 0;
 
 // makes a password using the passphrases array
 function phraseSub(){
     event.preventDefault();
     let answerText = ``;
+    let lengthCheck = '';
     let guess = $("#guess").val();
     guess = guess.toLowerCase();
-    let lengthCheck = 'incorrect';
+    numberOfGuesses++;
+    
 
     if(guess.length == randomWord.length){
-        lengthCheck = 'correct';
-    } else {
-        lengthCheck = 'incorrect';
+        lengthCheck = 'the correct length.';
+    } else if(guess.length < randomWord.length) {
+        lengthCheck = 'too short';
+    } else if(guess.length > randomWord.length) {
+        lengthCheck = 'too long';
     }
 
     let letterCheck = letterCheckFunc(guess);
@@ -21,7 +26,10 @@ function phraseSub(){
 
     if(guess == randomWord){
         $("#guess").prop('disabled', true);
-        answerText = `That is correct!`
+        answerText = `
+            <p>- You guessed the word!</p>
+            <p>- It took you ${numberOfGuesses} guesses</p>
+        `;
         $('.subBtn').html(`
             <button id="phraseBtn" onclick="tryAgain()">Play Again</button>
         `);
@@ -30,7 +38,8 @@ function phraseSub(){
         $('#guess').val('');
         answerText += `<p>- Your guess was '${guess}'.</p>`;
         answerText += `<p>- That is incorrect.</p>`;
-        answerText += `<p>- Your word is the ${lengthCheck} length.</p>`;
+        answerText += `<p>- You've guessed ${numberOfGuesses} times.`
+        answerText += `<p>- Your guess is ${lengthCheck}.</p>`;
         answerText += `<p>- You have ${letterCheck} correct letters.</p>`;
         answerText += `<p>- You have ${locationCheck} letters in the correct spot.</p>`;
     }
@@ -106,6 +115,7 @@ function locationCheckFunc(guess){
 function tryAgain(){
     event.preventDefault();
     randomWord = passphrases[Math.floor(Math.random() * passphrases.length)];
+    numberOfGuesses = 0;
     $("#guess").prop('disabled', false);
     $('#guess').val('');
     $('.subBtn').html(`
