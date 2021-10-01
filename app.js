@@ -50,7 +50,7 @@ function phraseSub(){
 function lengthCheckFunc(guess){
     let length;
     if(guess.length == randomWord.length){
-        length = 'the correct length.';
+        length = 'the correct length';
     } else if(guess.length < randomWord.length) {
         length = 'too short';
     } else if(guess.length > randomWord.length) {
