@@ -53,7 +53,7 @@ function giveUp(){
     $("#guess").prop('disabled', true);
         answerText = `
             <p>- You gave up on guessing after ${numberOfGuesses} guesses.</p>
-            <p>- The correct word was ${randomWord}.</p>
+            <p>- The correct word was '${randomWord}'.</p>
         `;
         $('.subBtn').html(`
             <button id="phraseBtn" onclick="tryAgain()">Play Again</button>
