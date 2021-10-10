@@ -47,6 +47,23 @@ function phraseSub(){
     `);
 };
 
+function giveUp(){
+    event.preventDefault();
+    let answerText = ``;
+    $("#guess").prop('disabled', true);
+        answerText = `
+            <p>- You gave up on guessing after ${numberOfGuesses} guesses.</p>
+            <p>- The correct word was ${randomWord}.</p>
+        `;
+        $('.subBtn').html(`
+            <button id="phraseBtn" onclick="tryAgain()">Play Again</button>
+        `);
+        clearInterval(timer);
+        $('#answerBox').html(`
+        ${answerText}
+    `);
+}
+
 function lengthCheckFunc(guess){
     let length;
     if(guess.length == randomWord.length){
@@ -130,6 +147,7 @@ function tryAgain(){
     $('#guess').val('');
     $('.subBtn').html(`
         <button id="phraseBtn" onclick="phraseSub()">Guess</button>
+        <button id="giveUpBtn" onclick="giveUp()">Give Up</button>
     `);
     $('#answerBox').html(``);
     $("#seconds").html('00');
